@@ -32,7 +32,31 @@ const getCards = async () => {
   return db?.data?.cards ?? [];
 };
 
+const getCard = async (id) => {
+  const { JSONFile, Low } = low;
+  const adapter = new JSONFile(config.dbPath);
+  const db = new Low(adapter);
+
+  await db.read();
+
+  return db.data.cards.find((card) => card.id === id) ?? {};
+};
+
+const addCard = async (card) => {
+  const { JSONFile, Low } = low;
+  const adapter = new JSONFile(config.dbPath);
+  const db = new Low(adapter);
+
+  await db.read();
+
+  db.data.cards.push(card);
+
+  await db.write();
+};
+
 module.exports = {
   initLowDb,
   getCards,
+  getCard,
+  addCard
 };

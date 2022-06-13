@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "",
+    "debug": "node --inspect index.js",
     "dev": "nodemon index.js --ignore ./database/**.json"
   },
   "keywords": [],
@@ -17,7 +18,8 @@
     "morgan": "^1.10.0",
     "passport": "^0.6.0",
     "passport-local": "^1.0.0",
-    "puppeteer": "^14.3.0"
+    "puppeteer": "^14.3.0",
+    "uuid": "^8.3.2"
   },
   "devDependencies": {
     "nodemon": "^2.0.16"

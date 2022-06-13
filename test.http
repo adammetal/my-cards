@@ -1,0 +1,11 @@
+POST http://localhost:8080/api/cards/
+Content-Type: application/json
+
+{
+  "name": "mistbinder",
+  "count": 4
+}
+
+###
+
+GET http://localhost:8080/api/cards/
