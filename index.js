@@ -1,7 +1,16 @@
 const db = require("./src/db");
+const app = require("./src/app");
 
-(async () => {
+const port = process.env?.PORT ?? 8080;
+
+const main = async () => {
   await db.initLowDb("./database/test.json");
-  const cards = await db.getCards();
-  console.log(cards);
-})();
+  app.listen(port, () => {
+    console.log(`App listening on ${port}`);
+  });
+};
+
+main().catch((err) => {
+  console.error(err);
+  process.exit(1);
+});

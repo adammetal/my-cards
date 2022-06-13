@@ -13,7 +13,7 @@ const initLowDb = async (dbPath) => {
   low.JSONFile = JSONFile;
 
   const adapter = new JSONFile(dbPath);
-  db = new Low(adapter);
+  const db = new Low(adapter);
 
   await db.read();
 
@@ -25,7 +25,7 @@ const initLowDb = async (dbPath) => {
 const getCards = async () => {
   const { JSONFile, Low } = low;
   const adapter = new JSONFile(config.dbPath);
-  db = new Low(adapter);
+  const db = new Low(adapter);
 
   await db.read();
 
