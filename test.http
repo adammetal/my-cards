@@ -9,3 +9,6 @@ Content-Type: application/json
 ###
 
 GET http://localhost:8080/api/cards/
+
+###
+GET http://localhost:8080/api/cards/64f3533a-8fdb-45e8-8da8-66c4bb5bdb68/meta

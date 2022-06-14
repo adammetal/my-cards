@@ -1,6 +1,7 @@
 const express = require("express");
-const { v4: uuidv4 } = require('uuid');
-const { getCards, getCard, addCard } = require("./db");
+const { v4: uuidv4 } = require("uuid");
+const getCardMeta = require("./card-meta");
+const { getCards, getCard, addCard, deleteCard, updateCard } = require("./db");
 
 const app = express();
 
@@ -26,8 +27,35 @@ app.post("/api/cards", async (req, res) => {
   res.json(card);
 });
 
-app.delete("/api/cards", (req, res) => {});
+app.delete("/api/cards/:id", async (req, res) => {
+  await deleteCard(req.params.id);
+  res.status(200).end();
+});
 
-app.patch("/api/cards", (req, res) => {});
+app.patch("/api/cards/:id", async (req, res) => {
+  const updated = await updateCard(req.params.id, req.body);
+  res.json(updated);
+});
+
+app.get("/api/cards/:id/meta", async (req, res) => {
+  const card = await getCard(req.params.id);
+
+  if (!card) {
+    return res.status(400).end();
+  }
+
+  if (card.meta) {
+    return res.json(card.meta);
+  }
+
+  const { name } = card;
+  const meta = await getCardMeta(name);
+
+  if (meta === null) {
+    return res.status(404).end();
+  }
+
+  await updateCard(req.params.id, { meta });
+});
 
 module.exports = app;
