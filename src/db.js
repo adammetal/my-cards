@@ -59,13 +59,17 @@ const addCard = async (card) => {
 const deleteCard = async (id) => {
   const db = await openDb();
 
-  const index = db.data.cards.findIndex((card) => card.id === id);
+  db.data.cards = db.data.cards.map((card) => {
+    if (card.id !== id) {
+      return card;
+    }
 
-  if (index === -1) {
-    throw new Error("Card not found");
-  }
+    return {
+      ...card,
+      deleted: true,
+    };
+  });
 
-  db.data.cards.splice(index, 1);
   await db.write();
 };
 
