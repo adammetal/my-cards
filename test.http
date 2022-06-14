@@ -2,13 +2,24 @@ POST http://localhost:8080/api/cards/
 Content-Type: application/json
 
 {
-  "name": "mistbinder",
-  "count": 4
+  "name": "wrath",
+  "count": 2
 }
 
 ###
+PATCH http://localhost:8080/api/cards/a28914a6-d8b2-4396-960c-801a2b01bbdf
+Content-Type: application/json
 
+{
+  "count": 4,
+  "deleted": false
+}
+
+###
 GET http://localhost:8080/api/cards/
 
 ###
-GET http://localhost:8080/api/cards/64f3533a-8fdb-45e8-8da8-66c4bb5bdb68/meta
+DELETE http://localhost:8080/api/cards/c8d2c2c9-20f4-4a89-b592-7590c35b5228
+
+###
+GET http://localhost:8080/api/cards/c8d2c2c9-20f4-4a89-b592-7590c35b5228/meta
