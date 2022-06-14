@@ -55,7 +55,9 @@ app.get("/api/cards/:id/meta", async (req, res) => {
     return res.status(404).end();
   }
 
-  await updateCard(req.params.id, { meta });
+  const updated = await updateCard(req.params.id, { meta });
+
+  res.json(updated);
 });
 
 module.exports = app;
