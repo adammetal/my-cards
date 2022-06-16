@@ -45,16 +45,16 @@ cardsApi.patch("/:id", async (req, res) => {
 cardsApi.get("/:id/meta", async (req, res) => {
   const card = req.card;
 
-  if (card.meta) {
+  if (typeof card?.meta !== "undefined") {
     return res.json(card.meta);
   }
 
   const { name } = card;
   const meta = await getCardMeta(name);
 
-  const updated = await updateCard(card.id, { meta });
+  await updateCard(card.id, { meta });
 
-  res.json(updated);
+  res.json(meta);
 });
 
 module.exports = cardsApi;
