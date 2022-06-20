@@ -35,7 +35,11 @@ const getCardMeta = async (title) => {
     );
 
     const cardDetails = [...detailsElement].reduce((acc, infoRow) => {
-      const label = infoRow.querySelector(".label")?.textContent?.trim();
+      const label = infoRow
+        .querySelector(".label")
+        ?.textContent?.trim()
+        .replace(":", "");
+        
       const value = infoRow.querySelector(".value")?.textContent?.trim();
 
       if (!label || !label.length) {

@@ -1,6 +1,6 @@
 const { Router } = require("express");
 const { v4: uuidv4 } = require("uuid");
-const getCardMeta = require("../card-meta");
+const getCardMeta = require("../get-card-meta");
 const { getCards, getCard, addCard, deleteCard, updateCard } = require("../db");
 
 const cardsApi = new Router();
@@ -52,7 +52,10 @@ cardsApi.get("/:id/meta", async (req, res) => {
   const { name } = card;
   const meta = await getCardMeta(name);
 
-  await updateCard(card.id, { meta });
+  if (meta !== null) {
+    const { cardTitle } = meta;
+    await updateCard(card.id, { name: cardTitle, meta });
+  }
 
   res.json(meta);
 });
